@@ -1,0 +1,53 @@
+---
+title: "EX03"
+author: "Roman Tilly"
+date: "25 4 2019"
+output:   
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+# install.packages("tidyverse")
+library(ggplot2)
+library(tidyverse)
+library(data.table)
+data(airquality)
+dt.airquality <- data.table(airquality)
+data(mtcars)
+dt.mtcars <- data.table("type" = row.names(mtcars), mtcars)
+
+write.table(dt.airquality, file = "airquality.csv", sep = ",", row.names = F)
+write.table(dt.mtcars, file = "mtcars.csv", sep = ",", row.names = F)
+ ```
+
+# Task 5
+```{r task5}
+
+ggplot(mpg) +
+  geom_bar(aes(x = manufacturer, fill = class)) +
+  theme_classic() + 
+  theme(axis.text.x = element_text(angle = 75, hjust = 1)) + 
+  labs("Categorywise Bar Chart", subtitle = "Manufacturer of vehicles", caption = "Source: Manufacturers form 'data' set") 
+
+```
+
+# Task 6a
+```{r task6a}
+ggplot(airquality) + 
+  geom_point(aes(x = Day, y = Ozone, fill = Month, size = Wind))
+```
+
+# Task 7 
+```{r task7}
+ggplot(mpg) +
+  geom_bar(aes(x = displ, fill = class), color = "#c4c4c4") +
+  labs("Histogram with Auto Binning", "Engine Displacement across Vehicle Classes") +
+  theme_classic() +
+  scale_fill_manual(values = c('#d53e4f','#fc8d59','#fee08b','#ffffbf','#e6f598','#99d594','#3288bd'))
+
+
+```
+
